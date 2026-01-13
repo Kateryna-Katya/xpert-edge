@@ -188,3 +188,122 @@
         </div>
     </div>
 </section>
+<section class="blog" id="blog">
+    <div class="container">
+        <div class="section-header-flex">
+            <div>
+                <span class="tag">Knowledge Base</span>
+                <h2 class="section-title">Практики, применимые уже сегодня</h2>
+            </div>
+            <a href="#" class="btn btn-outline">Все статьи</a>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="/img/one.jpg" alt="AI Bots">
+                    <span class="category">Разработка</span>
+                </div>
+                <div class="card-body">
+                    <span class="post-date">12 Января, 2026</span>
+                    <h3>Как собрать AI-ассистента за 2 минуты без кода</h3>
+                    <p>Пошаговый путь, понятный каждому: от выбора модели до первой успешной интеграции в
+                        бизнес-процессы.</p>
+                    <a href="#contact" class="read-more">Узнать детали <i data-lucide="arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="/img/two.jpg" alt="Innovation">
+                    <span class="category">Инновации</span>
+                </div>
+                <div class="card-body">
+                    <span class="post-date">10 Января, 2026</span>
+                    <h3>Технология для пассивного дохода в 2026 году</h3>
+                    <p>Разбираем, как автономные боты могут генерировать ценность и оптимизировать затраты в
+                        автоматическом режиме.</p>
+                    <a href="#contact" class="read-more">Узнать детали <i data-lucide="arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="/img/three.jpg" alt="AI Future">
+                    <span class="category">Будущее</span>
+                </div>
+                <div class="card-body">
+                    <span class="post-date">08 Января, 2026</span>
+                    <h3>Переосмыслите подход к развитию: AI в быту</h3>
+                    <p>Почему AI-инструменты для реальных задач становятся стандартом комфортной жизни в Европе.</p>
+                    <a href="#contact" class="read-more">Узнать детали <i data-lucide="arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <span class="tag">Связь с экспертом</span>
+                <h2 class="section-title">Готовы начать?</h2>
+                <p class="contact-text">
+                    Запросите бесплатную консультацию по всем вопросам. Платформа уже доступна в Европе, и мы поможем
+                    вам интегрировать AI-решения за считанные дни.
+                </p>
+
+                <div class="contact-meta">
+                    <div class="meta-item">
+                        <div class="meta-icon"><i data-lucide="mail"></i></div>
+                        <div>
+                            <span>Пишите нам</span>
+                            <p>hello@xpert-edge.blog</p>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-icon"><i data-lucide="map-pin"></i></div>
+                        <div>
+                            <span>Наш офис</span>
+                            <p>15 Rue de la Paix, Paris, France</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <form id="ai-form" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Телефон (только цифры)" required>
+                    </div>
+
+                    <div class="captcha-wrapper">
+                        <label for="captcha">Решите пример: <span id="captcha-question"></span></label>
+                        <input type="text" id="captcha-answer" placeholder="Ответ" required>
+                    </div>
+
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="agree" required>
+                        <label for="agree">Я согласен с <a href="./personal-data-policy.html">политикой
+                                конфиденциальности</a></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-full">Запросить доступ</button>
+                </form>
+
+                <div id="success-msg" class="success-message">
+                    <div class="success-icon"><i data-lucide="check-circle"></i></div>
+                    <h3>Заявка принята!</h3>
+                    <p>Экспертная поддержка свяжется с вами в течение 15 минут.</p>
+                    <button class="btn btn-outline" onclick="resetForm()">Отправить еще раз</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

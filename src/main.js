@@ -1,95 +1,91 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация иконок Lucide
+    // 1. Инициализация иконок
     lucide.createIcons();
 
-    // Плавное изменение фона хедера при скролле
+    // 2. Мобильное меню
+    const burger = document.querySelector('.burger');
+    const mobileOverlay = document.querySelector('.mobile-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+    const toggleMenu = () => {
+        burger.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = burger.classList.contains('active') ? 'hidden' : '';
+    };
+
+    burger.addEventListener('click', toggleMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+    // 3. Header Scroll Effect
     const header = document.querySelector('.header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.padding = '12px 0';
-            header.style.background = 'rgba(5, 5, 7, 0.9)';
-        } else {
-            header.style.padding = '20px 0';
-            header.style.background = 'transparent';
-        }
+        header.style.background = window.scrollY > 50 ? 'rgba(5, 5, 7, 0.9)' : 'transparent';
+        header.style.padding = window.scrollY > 50 ? '12px 0' : '20px 0';
     });
 
-    // Анимация логотипа (микродвижение точки)
-    gsap.to('.logo-dot', {
-        scale: 1.3,
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut"
-    });
-
-  // Интерактив для Hero (движение мыши за сферой)
-document.addEventListener('mousemove', (e) => {
+    // 4. Интерактив: Сфера в Hero и Spotlight в карточках
     const orb = document.querySelector('.orb');
-    if (!orb) return;
-    
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    
-    // Мягкое смещение сферы в зависимости от положения курсора
-    orb.style.transform = `translate(${x * 50}px, ${y * 50}px)`;
-});
-
-// Дополнительная валидация: появление элементов при скролле (через Intersection Observer)
-const observerOptions = {
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+    document.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        // Сфера
+        if (orb) {
+            const moveX = (clientX / window.innerWidth - 0.5) * 60;
+            const moveY = (clientY / window.innerHeight - 0.5) * 60;
+            orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
         }
+        // Карточки
+        document.querySelectorAll('.solution-card').forEach(card => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${clientX - rect.left}px`);
+            card.style.setProperty('--y', `${clientY - rect.top}px`);
+        });
     });
-}, observerOptions);
 
-// Применяем ко всем секциям, которые создадим дальше
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-});
-    // Интерактивный свет на карточках (движение за мышью внутри карточки)
-document.querySelectorAll('.solution-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        card.style.setProperty('--x', `${x}px`);
-        card.style.setProperty('--y', `${y}px`);
+    // 5. Intersection Observer для анимаций появления
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        }, { threshold: 0.1 });
     });
-});
 
-// Обновим lucide для новых иконок
-    lucide.createIcons();
-    // Наблюдатель за секцией преимуществ
-const advObserverOptions = {
-    threshold: 0.5
-};
+    document.querySelectorAll('.adv-item, .blog-card').forEach(el => observer.observe(el));
 
-const advObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
+    // 6. Форма и Капча
+    let captchaRes;
+    const genCaptcha = () => {
+        const a = Math.floor(Math.random() * 10), b = Math.floor(Math.random() * 10);
+        captchaRes = a + b;
+        document.getElementById('captcha-question').innerText = `${a} + ${b} = ?`;
+    };
+
+    const form = document.getElementById('ai-form');
+    if (form) {
+        genCaptcha();
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const ans = document.getElementById('captcha-answer').value;
+            if (parseInt(ans) !== captchaRes) {
+                alert('Капча введена неверно');
+                return genCaptcha();
+            }
+            form.querySelector('button').innerText = 'Отправка...';
+            setTimeout(() => {
+                form.style.display = 'none';
+                document.getElementById('success-msg').style.display = 'flex';
+            }, 1500);
+        });
+    }
+
+    // 7. Cookie Popup
+    const cookiePop = document.getElementById('cookie-popup');
+    const acceptBtn = document.getElementById('accept-cookies');
+
+    if (!localStorage.getItem('xpert_cookies')) {
+        setTimeout(() => cookiePop.classList.add('visible'), 2000);
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('xpert_cookies', 'true');
+        cookiePop.classList.remove('visible');
     });
-}, advObserverOptions);
-
-document.querySelectorAll('.adv-item').forEach(item => {
-    advObserver.observe(item);
-});
-    // Легкий параллакс эффект для инновационных карточек
-document.addEventListener('mousemove', (e) => {
-    const cards = document.querySelectorAll('.innov-card');
-    const x = (window.innerWidth / 2 - e.clientX) / 50;
-    const y = (window.innerHeight / 2 - e.clientY) / 50;
-
-    cards.forEach(card => {
-        card.style.transform = `translate(${x}px, ${y}px)`;
-    });
-});
 });
