@@ -524,3 +524,331 @@ ul {
         grid-template-columns: 1fr;
     }
 }
+/* --- ADVANTAGES SECTION --- */
+.advantages {
+    padding: 100px 0;
+    position: relative;
+}
+
+.adv-wrapper {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+.adv-sticky {
+    position: sticky;
+    top: 120px;
+    flex: 1;
+}
+
+.tag {
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.adv-visual {
+    margin-top: 50px;
+    position: relative;
+    height: 200px;
+}
+
+.visual-circle {
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    animation: pulseCircle 4s infinite linear;
+}
+
+.visual-line {
+    width: 2px;
+    height: 150px;
+    background: linear-gradient(to bottom, var(--accent-bright), transparent);
+    position: absolute;
+    left: 49px;
+    top: 0;
+}
+
+@keyframes pulseCircle {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+.adv-list {
+    flex: 1;
+}
+
+.adv-item {
+    padding: 60px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.3;
+    transform: translateX(30px);
+    transition: all 0.6s ease;
+}
+
+.adv-item.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.adv-num {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--accent-bright);
+    margin-bottom: 15px;
+}
+
+.adv-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.adv-item p {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Адаптив */
+@media (max-width: 992px) {
+    .adv-wrapper {
+        flex-direction: column;
+    }
+
+    .adv-sticky {
+        position: static;
+        margin-bottom: 50px;
+    }
+
+    .adv-item {
+        opacity: 1;
+        transform: none;
+        padding: 40px 0;
+    }
+}
+/* --- INNOVATIONS SECTION --- */
+.innovations {
+    padding: 120px 0;
+    background: radial-gradient(circle at 50% 50%, #0a0a15 0%, var(--bg-color) 100%);
+    overflow: hidden;
+}
+
+.innov-container {
+    position: relative;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+/* Стили ядра */
+.innov-core {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.core-ring {
+    position: absolute;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 50%;
+    animation: rotateRing 10s infinite linear;
+}
+
+.core-ring:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    border-style: dashed;
+}
+
+.core-ring:nth-child(2) {
+    width: 450px;
+    height: 450px;
+    animation-direction: reverse;
+    opacity: 0.5;
+}
+
+.core-ring:nth-child(3) {
+    width: 600px;
+    height: 600px;
+    border-width: 2px;
+    opacity: 0.2;
+}
+
+.core-pulse {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--accent);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: coreGlow 3s infinite ease-in-out;
+}
+
+.core-icon {
+    width: 60px;
+    height: 60px;
+    color: var(--accent-bright);
+    z-index: 3;
+    filter: drop-shadow(0 0 10px var(--accent-bright));
+}
+
+@keyframes rotateRing {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes coreGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+}
+
+/* Карточки вокруг ядра */
+.innov-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.innov-card {
+    position: absolute;
+    width: 280px;
+    pointer-events: all;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    display: flex;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+.innov-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--accent-bright);
+    transform: scale(1.05);
+}
+
+.top-left {
+    top: 10%;
+    left: 10%;
+}
+
+.top-right {
+    top: 10%;
+    right: 10%;
+}
+
+.bottom-left {
+    bottom: 10%;
+    left: 10%;
+}
+
+.bottom-right {
+    bottom: 10%;
+    right: 10%;
+}
+
+.innov-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-bright);
+    flex-shrink: 0;
+}
+
+.innov-info h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.innov-info p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.innov-cta {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.innov-cta p {
+    margin-bottom: 20px;
+    color: var(--text-dim);
+}
+
+/* Адаптив для радара */
+@media (max-width: 992px) {
+    .innov-container {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .core-ring {
+        display: none;
+    }
+
+    .innov-grid {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .innov-card {
+        position: static;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .innov-grid {
+        grid-template-columns: 1fr;
+    }
+}

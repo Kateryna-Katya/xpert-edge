@@ -65,5 +65,31 @@ document.querySelectorAll('.solution-card').forEach(card => {
 });
 
 // Обновим lucide для новых иконок
-lucide.createIcons();
+    lucide.createIcons();
+    // Наблюдатель за секцией преимуществ
+const advObserverOptions = {
+    threshold: 0.5
+};
+
+const advObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, advObserverOptions);
+
+document.querySelectorAll('.adv-item').forEach(item => {
+    advObserver.observe(item);
+});
+    // Легкий параллакс эффект для инновационных карточек
+document.addEventListener('mousemove', (e) => {
+    const cards = document.querySelectorAll('.innov-card');
+    const x = (window.innerWidth / 2 - e.clientX) / 50;
+    const y = (window.innerHeight / 2 - e.clientY) / 50;
+
+    cards.forEach(card => {
+        card.style.transform = `translate(${x}px, ${y}px)`;
+    });
+});
 });
